@@ -48,7 +48,7 @@ export default function Login() {
           const token = response.data.data.accessToken;
           sessionStorage.setItem("token", token);
 
-          dispatch(setUserInfo(response.data.user));
+          dispatch(setUserInfo(response.data.data.user));
           navigate("/");
           toast.success("Login successfully!");
         }
@@ -125,8 +125,8 @@ export default function Login() {
           </form>
         </div>
       </div>
-
       <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
+          
     </>
   );
 }

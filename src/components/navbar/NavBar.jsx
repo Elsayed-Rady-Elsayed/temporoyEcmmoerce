@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaSearch, FaBars, FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux-toolkit/slices/Cart-slice";
 
 export default function Header() {
@@ -13,6 +13,10 @@ export default function Header() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const { userInfo } = useSelector((state) => state.auth);
+  const isAdmin = userInfo?.admin || false;
+  console.log(isAdmin);
 
   const dispatch = useDispatch();
 
@@ -30,7 +34,7 @@ export default function Header() {
             setProducts(data.products || []);
             setLoading(false);
           })
-          .catch((err) => {
+          .catch(() => {
             setError("Failed to fetch products.");
             setLoading(false);
           });
@@ -102,12 +106,14 @@ export default function Header() {
               >
                 Shop
               </Link>
-              <Link
-                to="/add"
-                className="hover:text-gray-500 text-[16px] ml-0 min-[810px]:ml-6 mt-2 min-[810px]:mt-0"
-              >
-                Add product
-              </Link>
+              {isAdmin && (
+                <Link
+                  to="/add"
+                  className="hover:text-gray-500 text-[16px] ml-0 min-[810px]:ml-6 mt-2 min-[810px]:mt-0"
+                >
+                  Add product
+                </Link>
+              )}
             </nav>
 
             {/* Search input */}
@@ -146,7 +152,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-
       {/* Search Results */}
       {filteredProducts.length > 0 && (
         <div className="bg-white px-4 py-2 mb-8 flex justify-center items-center">
@@ -188,6 +193,7 @@ export default function Header() {
           </div>
         </div>
       )}
+          
     </>
   );
 }
