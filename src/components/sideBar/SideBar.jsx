@@ -16,7 +16,7 @@ function SideBar() {
       <div className="SideBar font-bold text-[15px] align-middle text-center border-r-4 md:h-[50vh] flex-col justify-center list-none">
         {categories.map((el, idx) => {
           return (
-            <li key={idx} className="mt-[10px] side-li">
+            <li key={idx} className="mt-[10px] side-li cursor-pointer">
               {el.name}
             </li>
           );

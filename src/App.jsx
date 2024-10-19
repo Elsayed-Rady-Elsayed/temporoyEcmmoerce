@@ -23,6 +23,7 @@ import Header from "./components/navbar/NavBar";
 import Login from "./components/login/login";
 import GoogleAuthCallback from "./components/Sign/GoogleAuthCallback";
 import GoogleCallback from "./components/Sign/GoogleAuthCallback";
+import Shop from "./components/shop";
 
 function App() {
   const products = useSelector((state) => state.products);
@@ -49,6 +50,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/add" element={<AddProduct />} />
+        <Route path="/Shop" element={<Shop />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route
           path="/"

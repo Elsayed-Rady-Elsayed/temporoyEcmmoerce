@@ -97,6 +97,12 @@ export default function Header() {
                 Sign Up
               </Link>
               <Link
+                to="/Shop"
+                className="hover:text-gray-500 text-[16px] ml-0 min-[810px]:ml-6 mt-2 min-[810px]:mt-0"
+              >
+                Shop
+              </Link>
+              <Link
                 to="/add"
                 className="hover:text-gray-500 text-[16px] ml-0 min-[810px]:ml-6 mt-2 min-[810px]:mt-0"
               >

@@ -11,13 +11,7 @@ function Categories() {
   useEffect(() => {
     dispatch(getCategories());
   }, []);
-  console.log({ categories });
-  // const [categories,setCatgories] =useState([])
-  // useEffect(()=>{
-  //     fetch('https://dummyjson.com/products/category-list')
-  //     .then(res => res.json())
-  //     .then(data => setCatgories(data));
-  // },[])
+
   return (
     <div className="Categories mt-[40px] mb-[05%] border-b-2 pb-10">
       <div className="banner  p-4 mb-10 my-auto">

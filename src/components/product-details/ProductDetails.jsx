@@ -2,28 +2,33 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../../redux-toolkit/slices/Cart-slice";
+import { addToWishlist } from "../../redux-toolkit/slices/wishlistSlice";
 
 export default function ProductDetails() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [product, setProduct] = useState({});
+  const [starsList, setStarsList] = useState([]);
   const params = useParams();
+  let id = Number(params.id);
+
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${params.id}`)
+    fetch(`https://fakestoreapi.com/products/${id}`)
       .then((res) => res.json())
-      .then((data) => setProduct(data));
-  }, []);
-  const [starsList, setStrsList] = useState([]);
-  const s = [];
-  const makeStars = () => {
-    for (var i = 0; i < product.rating.rate; i++) {
-      s.push(i);
-    }
-  };
+      .then((data) => {
+        setProduct(data);
+      });
+  }, [id]);
+
   useEffect(() => {
-    makeStars();
-    setStrsList(s);
-  }, []);
+    if (product.rating && product.rating.rate) {
+      const starsArray = Array(Math.floor(product.rating.rate)).fill(0);
+      setStarsList(starsArray);
+    }
+  }, [product]);
+
+  console.log(product);
+
   return (
     <>
       <div className="bg-gray-100">
@@ -92,7 +97,8 @@ export default function ProductDetails() {
                   );
                 }, [])}
                 <span className="ml-2 text-gray-600">
-                  {product.rating.rate} ({product.rating.count} reviews)
+                  {product.id ? product.rating.rate : 0} (
+                  {product.id ? product.rating.count : 0} reviews)
                 </span>
               </div>
               <p className="text-gray-700 mb-6">{product.description}</p>
@@ -125,7 +131,10 @@ export default function ProductDetails() {
                 >
                   Add to Cart
                 </button>
-                <button className="bg-gray-200 flex gap-2 items-center  text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                <button
+                  onClick={() => addToWishlist(product)}
+                  className="bg-gray-200 flex gap-2 items-center  text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                >
                   Wishlist
                 </button>
               </div>
