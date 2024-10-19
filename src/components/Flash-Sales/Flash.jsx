@@ -125,7 +125,7 @@ function Flash() {
               image={el.image}
               title={el.title}
               price={el.price}
-              oldPrice={el.price - el.price * 0.2}
+              oldPrice={Math.round(el.price - el.price * 0.2)}
               stars={el.rating.rate}
               reviews={el.rating.count}
             />

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 // import { IoIosPhonePortrait } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux-toolkit/slices/categoriesReducer";
+import { Link } from "react-router-dom";
 
 function Categories() {
   const categories = useSelector((state) => state.categories);
@@ -34,9 +35,12 @@ function Categories() {
                         } transition duration-300`}
           >
             <div className="icon text-3xl mb-2 ">
-              <img src={category.image} alt="" className="w-[100%] " />
+              {/* <img src={category.image} alt="" className="w-[100%] " /> */}
             </div>
-            <h1 className="md:text-[20px] font-semibold">{category.name}</h1>
+            <h1 className="md:text-[20px] font-semibold">
+              {" "}
+              <Link to={`/Shop/${category}`}>{category}</Link>
+            </h1>
           </div>
         ))}
       </div>

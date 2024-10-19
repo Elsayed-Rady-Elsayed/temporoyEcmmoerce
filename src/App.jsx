@@ -51,6 +51,7 @@ function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/add" element={<AddProduct />} />
         <Route path="/Shop" element={<Shop />} />
+        <Route path="/Shop/:category" element={<Shop />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route
           path="/"
